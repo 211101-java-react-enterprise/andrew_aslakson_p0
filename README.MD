@@ -1,3 +1,3 @@
-#Project 0
+#project 0
 
-This is my read me
+-This is my first project!
