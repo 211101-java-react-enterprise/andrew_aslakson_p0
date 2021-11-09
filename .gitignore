@@ -1,0 +1,7 @@
+# unwanted project config files
+.idea/
+*.iml
+
+# unwanted build files
+out/
+*.class
