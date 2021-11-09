@@ -5,3 +5,4 @@
 # unwanted build files
 out/
 *.class
+*.jar
