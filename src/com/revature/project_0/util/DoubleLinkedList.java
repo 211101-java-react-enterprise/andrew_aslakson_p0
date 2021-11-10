@@ -103,23 +103,35 @@ public class DoubleLinkedList<T> implements TraversingList<T> {
 
     @Override
     public T next() {
-        if (currentNode == tail) return null;
+        if (currentNode == tail) return tail.datum;
 
+        T tempObj = currentNode.datum;
         currentNode = currentNode.nextNode;
-        return retrieveCurrent();
+        return tempObj;
     }
 
     @Override
     public T prev() {
-        if (currentNode == head) return null;
+        if (currentNode == head) return head.datum;
 
+        T tempObj = currentNode.datum;
         currentNode = currentNode.prevNode;
-        return retrieveCurrent();
+        return tempObj;
     }
 
     @Override
     public void setCurrent(int index) {
         currentNode = getNodeByIndex(index);
+    }
+
+    @Override
+    public void moveToBottom() {
+        currentNode = head;
+    }
+
+    @Override
+    public void moveToTop() {
+        currentNode = tail;
     }
 
     private Node<T> getNodeByIndex(int index) {
