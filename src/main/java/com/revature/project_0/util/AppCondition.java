@@ -1,5 +1,6 @@
 package com.revature.project_0.util;
 
+import com.revature.project_0.daos.UserDAO;
 import com.revature.project_0.screens.*;
 import com.revature.project_0.services.UserService;
 
@@ -19,7 +20,7 @@ public class AppCondition {
         navigator = new Navigator();
         reader = new BufferedReader(new InputStreamReader(System.in));
 
-        userservice = new UserService();
+        userservice = new UserService(new UserDAO());
 
         // TODO add MORE Menus here!
         navigator.addMenu(new WelcomeMenu(reader, navigator));
