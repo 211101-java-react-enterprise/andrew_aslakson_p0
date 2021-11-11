@@ -13,19 +13,19 @@ public class AppCondition {
     private final Navigator navigator;
     private final BufferedReader reader;
 
-    private final UserService userservice;
+    private final UserService userService;
 
     public AppCondition() {
         running = true;
         navigator = new Navigator();
         reader = new BufferedReader(new InputStreamReader(System.in));
 
-        userservice = new UserService(new UserDAO());
+        userService = new UserService(new UserDAO());
 
         // TODO add MORE Menus here!
         navigator.addMenu(new WelcomeMenu(reader, navigator));
         navigator.addMenu(new MainMenu(reader, navigator));
-        navigator.addMenu(new UserRegisterMenu(reader, navigator));
+        navigator.addMenu(new UserRegisterMenu(reader, navigator, userService));
         navigator.addMenu(new LoginMenu(reader, navigator));
         navigator.addMenu(new UserMenu(reader, navigator));
         navigator.addMenu(new EndSessionMenu(reader, navigator));

@@ -6,8 +6,7 @@ drop table accounts;
 drop table transactions;
 
 create table app_users (
-	id serial primary key,
-	uuid varchar unique not null,
+	id varchar primary key,
 	first_name varchar,
 	last_name varchar,
 	email varchar(255) unique not null,
@@ -16,7 +15,7 @@ create table app_users (
 );
 
 create table transactions (
-	id serial primary key,
+	id varchar primary key,
 	dateTime date,
 	type_flag bool,
 	amount numeric(9, 2),
@@ -25,15 +24,16 @@ create table transactions (
 );
 
 create table accounts ( 
-	id serial primary key,
+	id varchar primary key,
 	uuid varchar,
 	account_name varchar,
 	current_balance numeric(9, 2)
 );
 
+-- Actually a transaction only belongs to a single account so I need to rethink this logic
 create table account_transactions (
-	account_id int,
-	transaction_id int,
+	account_id varchar,
+	transaction_id varchar,
 	
 	primary key (account_id, transaction_id),
 	
@@ -47,8 +47,8 @@ create table account_transactions (
 ); 
 
 create table user_accounts (
-	account_id int,
-	user_id int,
+	account_id varchar,
+	user_id varchar,
 	
 	primary key (account_id, user_id),
 	

@@ -1,13 +1,17 @@
 package com.revature.project_0.screens;
 
 import com.revature.project_0.models.User;
+import com.revature.project_0.services.UserService;
 import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
 
 public class UserRegisterMenu extends Menu {
-    public UserRegisterMenu(BufferedReader consoleReader, Navigator navigator) {
+    private UserService userService;
+
+    public UserRegisterMenu(BufferedReader consoleReader, Navigator navigator, UserService userService) {
         super("Registration Menu", "/register", consoleReader, navigator);
+        this.userService = userService;
     }
 
     @Override
@@ -31,6 +35,8 @@ public class UserRegisterMenu extends Menu {
         String password = consoleReader.readLine();
         System.out.println("\\--------------------------------------------/");
 
+        //DEBUG OUTPUT
+        /*
         System.out.printf("Provided user credentials:\n" +
                           "First Name: %s\n" +
                           "Last Name: %s\n" +
@@ -38,9 +44,12 @@ public class UserRegisterMenu extends Menu {
                           "Username: %s\n" +
                           "password: %s\n",
                           firstName, lastName, email, username, password);
+        */
 
         User newUser = new User(firstName, lastName, email, username, password);
 
-        //TODO: use services to register user
+        userService.register(newUser);
+        System.out.println("User persisted to database.");
+        navigator.navigateTo("/main_menu");
     }
 }
