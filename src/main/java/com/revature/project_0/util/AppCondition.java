@@ -1,7 +1,9 @@
 package com.revature.project_0.util;
 
+import com.revature.project_0.daos.AccountDAO;
 import com.revature.project_0.daos.UserDAO;
 import com.revature.project_0.screens.*;
+import com.revature.project_0.services.AccountService;
 import com.revature.project_0.services.UserService;
 
 import java.io.BufferedReader;
@@ -14,6 +16,7 @@ public class AppCondition {
     private final BufferedReader reader;
 
     private final UserService userService;
+    private final AccountService accountService;
 
     public AppCondition() {
         running = true;
@@ -21,15 +24,16 @@ public class AppCondition {
         reader = new BufferedReader(new InputStreamReader(System.in));
 
         userService = new UserService(new UserDAO());
+        accountService = new AccountService(new AccountDAO());
 
         // TODO add MORE Menus here!
         navigator.addMenu(new WelcomeMenu(reader, navigator));
         navigator.addMenu(new MainMenu(reader, navigator));
         navigator.addMenu(new UserRegisterMenu(reader, navigator, userService));
-        navigator.addMenu(new LoginMenu(reader, navigator));
-        navigator.addMenu(new UserMenu(reader, navigator));
+        navigator.addMenu(new LoginMenu(reader, navigator, userService));
+        navigator.addMenu(new UserMenu(reader, navigator, userService));
         navigator.addMenu(new EndSessionMenu(reader, navigator));
-        navigator.addMenu(new AccountViewerMenu(reader, navigator));
+        navigator.addMenu(new AccountViewerMenu(reader, navigator, userService, accountService));
 
     }
 

@@ -4,24 +4,31 @@ import com.revature.project_0.util.DoubleLinkedList;
 /**
  *      Possibly should be abstract with checking account and savings account classes
  */
-public class Account {
+public abstract class Account {
     private String uuid;
     private DoubleLinkedList<Transaction> transactions;
         //TODO
     String name;
 
-    User user;
-
-    double currentBalance;
+    private double currentBalance;
 
     Account() {
         transactions = new DoubleLinkedList<>();
 
     }
 
-    User getUser() {
-        return user;
+    public final Transaction getNextTransaction() {
+        return transactions.next();
     }
+    public final Transaction getPrevTransaction() {
+        return transactions.prev();
+    }
+
+    public final void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+
+    }
+
 
 
 }

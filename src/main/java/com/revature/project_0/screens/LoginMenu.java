@@ -1,12 +1,16 @@
 package com.revature.project_0.screens;
 
+import com.revature.project_0.services.UserService;
 import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
 
 public class LoginMenu extends Menu {
-    public LoginMenu(BufferedReader consoleReader, Navigator navigator) {
+    private UserService userService;
+
+    public LoginMenu(BufferedReader consoleReader, Navigator navigator, UserService userService) {
         super("Login Menu", "/login", consoleReader, navigator);
+        this.userService = userService;
 
     }
 
@@ -22,17 +26,18 @@ public class LoginMenu extends Menu {
         String password = consoleReader.readLine();
 
         System.out.println("\\----------------------------------/");
+
+        //DEBUG OUTPUT
+        /*
         System.out.println("Provided user credentials:");
         System.out.printf("Username: %s\n" +
                           "Password: %s\n",
                           username, password);
+        */
 
-        //TODO: Use user service to validate credentials
+        userService.authenticate(username, password);
 
-        //change to access different outputs
-        boolean isValid = true;
-
-        if (isValid) {
+        if (userService.getCurrentUser() != null) {
             navigator.navigateTo("/user_menu");
         } else {
             navigator.navigateTo("/main_menu");

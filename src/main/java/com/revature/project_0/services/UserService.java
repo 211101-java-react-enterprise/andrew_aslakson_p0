@@ -40,7 +40,9 @@ public class UserService {
     }
 
     public void authenticate(String username, String password) {
-        //TODO: IMPLEMENT ME!
+        if (!username.trim().equals("") && username != null && !password.trim().equals("") && password != null) {
+            currentUser = userDAO.findUserByUsernameAndPassword(username, password);
+        }
 
     }
 

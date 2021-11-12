@@ -90,6 +90,13 @@ public class DoubleLinkedList<T> implements TraversingList<T> {
     }
 
     @Override
+    public void clear() {
+        head = tail = currentNode = null;
+        size = 0;
+
+    }
+
+    @Override
     public T get(int index) {
         if (index < 0 || index >= size) return null;
 

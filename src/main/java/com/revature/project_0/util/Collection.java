@@ -7,5 +7,6 @@ public interface Collection<T> {
     boolean isEmpty();
     boolean remove(T elem);
     int size();
+    void clear();
 
 }
