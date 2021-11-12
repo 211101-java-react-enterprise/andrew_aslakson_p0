@@ -1,6 +1,7 @@
 package com.revature.project_0.util;
 
 import com.revature.project_0.screens.Menu;
+import com.revature.project_0.util.collections.DoubleLinkedList;
 
 public class Navigator {
     private final DoubleLinkedList<Menu> menus;

@@ -1,8 +1,8 @@
 package com.revature.project_0.daos;
 
 import com.revature.project_0.models.User;
-import com.revature.project_0.util.ConnectionFactory;
-import com.revature.project_0.util.TraversingList;
+import com.revature.project_0.util.connections.ConnectionFactory;
+import com.revature.project_0.util.collections.TraversingList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,11 +45,11 @@ public class UserDAO implements CrudDAO<User> {
     public User save(User newUser) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            newUser.setUuid(UUID.randomUUID().toString());
+            newUser.setUserUUID(UUID.randomUUID().toString());
 
             String sql = "insert into app_users (id, first_name, last_name, email, username, password) values (?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, newUser.getUuid());
+            pstmt.setString(1, newUser.getUserUUID());
             pstmt.setString(2, newUser.getFirstName());
             pstmt.setString(3, newUser.getLastName());
             pstmt.setString(4, newUser.getEmail());
@@ -117,7 +117,7 @@ public class UserDAO implements CrudDAO<User> {
                 rs.getString("username"),
                 rs.getString("password")
             );
-        user.setUuid(rs.getString("id"));
+        user.setUserUUID(rs.getString("id"));
 
         return user;
 

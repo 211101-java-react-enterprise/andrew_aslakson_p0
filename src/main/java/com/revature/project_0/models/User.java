@@ -1,7 +1,8 @@
 package com.revature.project_0.models;
 
 public class User {
-    private String uuid;
+    private String userUUID;
+
     private String firstName;
     private String lastName;
     private String email;
@@ -17,12 +18,12 @@ public class User {
 
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getUserUUID() {
+        return userUUID;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setUserUUID(String userUUID) {
+        this.userUUID = userUUID;
     }
 
     public String getFirstName() {

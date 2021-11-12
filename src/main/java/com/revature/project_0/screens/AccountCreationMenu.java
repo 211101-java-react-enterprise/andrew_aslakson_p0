@@ -1,5 +1,8 @@
 package com.revature.project_0.screens;
 
+import com.revature.project_0.models.accounts.Account;
+import com.revature.project_0.models.accounts.CheckingAccount;
+import com.revature.project_0.models.accounts.SavingsAccount;
 import com.revature.project_0.services.AccountService;
 import com.revature.project_0.services.UserService;
 import com.revature.project_0.util.Navigator;
@@ -18,23 +21,30 @@ public class AccountCreationMenu extends Menu{
 
     @Override
     public void render() throws Exception {
-        String input;
-
         System.out.println("/----------------------------------\\");
         System.out.printf(" Account Creation for %s:", userService.getCurrentUser().getUsername());
         System.out.print("Account Name: ");
-        input = consoleReader.readLine();
+        String name = consoleReader.readLine();
 
-        System.out.println("2) Create New Account");
-        System.out.println("3) Add User to existing account");
-        System.out.println("4) Exit to Main Menu");
-        System.out.println("\\----------------------------------/");
-        System.out.println("Please select an option:");
+        System.out.println("What type of account will this be?");
+        System.out.println("1) Checking Account");
+        System.out.println("2) Savings Account");
         System.out.print(">> ");
+        String input = consoleReader.readLine();
 
+        System.out.println("\\----------------------------------/");
 
-
-
+        Account newAccount;
+        switch (input) {
+            case "1":
+                newAccount = new CheckingAccount(name, 0.0, "C");
+                break;
+            case "2":
+                newAccount = new SavingsAccount(name, 0.0, "S");
+                break;
+            default:
 
         }
+
+    }
 }

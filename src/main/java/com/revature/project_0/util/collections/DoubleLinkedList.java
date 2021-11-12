@@ -1,4 +1,6 @@
-package com.revature.project_0.util;
+package com.revature.project_0.util.collections;
+
+import com.revature.project_0.util.collections.TraversingList;
 
 /**
  *      add can only append to end of list

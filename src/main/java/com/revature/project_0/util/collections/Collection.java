@@ -1,4 +1,4 @@
-package com.revature.project_0.util;
+package com.revature.project_0.util.collections;
 
 public interface Collection<T> {
 

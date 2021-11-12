@@ -1,6 +1,6 @@
 package com.revature.project_0.daos;
 
-import com.revature.project_0.util.TraversingList;
+import com.revature.project_0.util.collections.TraversingList;
 
 public interface CrudDAO<T> {
     T save(T newObj);

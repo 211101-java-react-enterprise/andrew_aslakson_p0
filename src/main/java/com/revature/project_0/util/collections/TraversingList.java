@@ -1,4 +1,6 @@
-package com.revature.project_0.util;
+package com.revature.project_0.util.collections;
+
+import com.revature.project_0.util.collections.Collection;
 
 public interface TraversingList<T> extends Collection<T> {
     /**

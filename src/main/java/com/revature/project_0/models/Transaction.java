@@ -3,6 +3,9 @@ package com.revature.project_0.models;
 import java.sql.Date;
 
 public class Transaction {
+    String transactionUUID;
+    String accountUUID;
+
     private boolean type; // true is deposit, false is withdrawl
     private Date dateTime;
 
@@ -10,17 +13,13 @@ public class Transaction {
     private double newBalance;
     private double oldBalance;
 
-    private User user;
-
-    Transaction(boolean type, Date date, double amount, double oldBalance, User user) {
+    Transaction(boolean type, Date date, double amount, double oldBalance) {
         this.type = type;
         this.dateTime = date;
 
         this.amount = amount;
         this.oldBalance = oldBalance;
         this.newBalance = (type) ? (amount + oldBalance) : (oldBalance - amount);
-
-        this.user = user;
 
     }
 
@@ -63,12 +62,5 @@ public class Transaction {
     public void setOldBalance(double oldBalance) {
         this.oldBalance = oldBalance;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    
 }

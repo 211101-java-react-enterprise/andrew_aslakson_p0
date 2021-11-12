@@ -1,4 +1,4 @@
-package com.revature.project_0.util;
+package com.revature.project_0.util.connections;
 
 /*
     Follows Singleton Design Pattern

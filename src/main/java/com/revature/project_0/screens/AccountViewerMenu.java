@@ -1,9 +1,9 @@
 package com.revature.project_0.screens;
 
-import com.revature.project_0.models.Account;
+import com.revature.project_0.models.accounts.Account;
 import com.revature.project_0.services.AccountService;
 import com.revature.project_0.services.UserService;
-import com.revature.project_0.util.DoubleLinkedList;
+import com.revature.project_0.util.collections.DoubleLinkedList;
 import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;

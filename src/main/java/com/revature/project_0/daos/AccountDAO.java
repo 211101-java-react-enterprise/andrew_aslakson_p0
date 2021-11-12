@@ -1,8 +1,9 @@
 package com.revature.project_0.daos;
 
-import com.revature.project_0.util.ConnectionFactory;
-import com.revature.project_0.util.DoubleLinkedList;
-import com.revature.project_0.util.TraversingList;
+import com.revature.project_0.models.accounts.Account;
+import com.revature.project_0.util.connections.ConnectionFactory;
+import com.revature.project_0.util.collections.DoubleLinkedList;
+import com.revature.project_0.util.collections.TraversingList;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -41,5 +42,9 @@ public class AccountDAO implements CrudDAO{
     @Override
     public boolean removeById(String id) {
         return false;
+    }
+
+    public Account findAccountByUserIDAndName(String name, String userUUID) {
+
     }
 }
