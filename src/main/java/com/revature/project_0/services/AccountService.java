@@ -14,9 +14,17 @@ public class AccountService {
         this.accountDAO = accountDAO;
     }
 
+    public Account getCurrentAccount() {
+        return currentAccount;
+    }
+
+    public void setCurrentAccount(Account currentAccount) {
+        this.currentAccount = currentAccount;
+    }
+
     public DoubleLinkedList<Account> getAccounts(String userUUID) {
         if (!userUUID.trim().equals("") && userUUID != null) {
-            accountDAO.findAccounts(userUUID);
+            return accountDAO.findAccounts(userUUID);
         }
 
         return null;
@@ -27,7 +35,13 @@ public class AccountService {
             return null;
         }
 
-        if (accountDAO.findAccountByUserIDAndName(account.getName(), userUUID) == null) {
+        Account newAccount;
+        if (!accountDAO.doesUserIDHaveAccountName(userUUID, account.getName())) {
+            newAccount = accountDAO.save(account);
+            if (!accountDAO.linkAccountToUser(userUUID, newAccount.getAccountUUID())) {
+                return null;
+            }
+            return newAccount;
 
         }
         return null;

@@ -67,5 +67,8 @@ public abstract class Account {
     }
 
 
-
+    @Override
+    public String toString() {
+        return String.format("%s : " + (type.equals("C") ? "Checking" : "Savings") + " : $%.2f", name, currentBalance);
+    }
 }

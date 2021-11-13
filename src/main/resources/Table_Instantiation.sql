@@ -52,6 +52,12 @@ select * from accounts;
 
 select * from user_accounts;
 
+select ua.user_uuid, a.account_name
+from user_accounts ua
+join accounts a
+on a.account_uuid = ua.account_uuid
+where user_uuid = ?;
+
 
 
 

@@ -19,5 +19,6 @@ public interface TraversingList<T> extends Collection<T> {
     void setCurrent(int index); // move current node to given index
     void moveToBottom(); // moves currentNode to head
     void moveToTop(); // moves current Node to tail
+    T getTop(); // returns tail.datum
 
 }

@@ -34,6 +34,7 @@ public class AppCondition {
         navigator.addMenu(new UserMenu(reader, navigator, userService));
         navigator.addMenu(new EndSessionMenu(reader, navigator));
         navigator.addMenu(new AccountViewerMenu(reader, navigator, userService, accountService));
+        navigator.addMenu(new AccountCreationMenu(reader, navigator, userService, accountService));
 
     }
 

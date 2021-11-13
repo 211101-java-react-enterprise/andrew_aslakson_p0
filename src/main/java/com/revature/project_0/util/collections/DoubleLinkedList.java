@@ -143,6 +143,11 @@ public class DoubleLinkedList<T> implements TraversingList<T> {
         currentNode = tail;
     }
 
+    @Override
+    public T getTop() {
+        return tail.datum;
+    }
+
     private Node<T> getNodeByIndex(int index) {
         Node<T> tempNode = head;
         for (int i = 0; i < index; i++) {

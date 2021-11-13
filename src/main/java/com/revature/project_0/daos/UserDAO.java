@@ -23,7 +23,7 @@ public class UserDAO implements CrudDAO<User> {
     public User findUserByUsernameAndPassword(String username, String password) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "select * from app_users where username = ? and password = ?";
+            String sql = "select * from users where username = ? and password = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, username);
@@ -47,7 +47,7 @@ public class UserDAO implements CrudDAO<User> {
 
             newUser.setUserUUID(UUID.randomUUID().toString());
 
-            String sql = "insert into app_users (id, first_name, last_name, email, username, password) values (?, ?, ?, ?, ?, ?)";
+            String sql = "insert into users (user_uuid, first_name, last_name, email, username, password) values (?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newUser.getUserUUID());
             pstmt.setString(2, newUser.getFirstName());
@@ -92,7 +92,7 @@ public class UserDAO implements CrudDAO<User> {
     private User getUserBySingleField(String field, String data) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "select * from app_users where ? = ?";
+            String sql = "select * from users where ? = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, field);
             pstmt.setString(2, data);
@@ -117,7 +117,7 @@ public class UserDAO implements CrudDAO<User> {
                 rs.getString("username"),
                 rs.getString("password")
             );
-        user.setUserUUID(rs.getString("id"));
+        user.setUserUUID(rs.getString("user_uuid"));
 
         return user;
 

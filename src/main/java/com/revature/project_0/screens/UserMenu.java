@@ -37,10 +37,10 @@ public class UserMenu extends Menu {
 
             switch (input) {
                 case "1":
-                    //TODO: Implement me!
+                    navigator.navigateTo("/account_viewer");
                     break;
                 case "2":
-                    navigator.navigateTo("");
+                    navigator.navigateTo("/account_creator");
                     break;
                 case "3":
                     //TODO: Implement me!

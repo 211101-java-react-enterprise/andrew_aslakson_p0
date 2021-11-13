@@ -34,17 +34,22 @@ public class AccountCreationMenu extends Menu{
 
         System.out.println("\\----------------------------------/");
 
-        Account newAccount;
+        Account newAccount = null;
         switch (input) {
             case "1":
-                newAccount = new CheckingAccount(name, 0.0, "C");
+                newAccount = new CheckingAccount(name, 0.0);
+
                 break;
             case "2":
-                newAccount = new SavingsAccount(name, 0.0, "S");
+                newAccount = new SavingsAccount(name, 0.0);
                 break;
             default:
 
         }
+
+        accountService.register(newAccount, userService.getCurrentUser().getUserUUID());
+
+        System.out.println("Account Persisted Successfully!");
 
     }
 }
