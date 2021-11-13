@@ -1,6 +1,7 @@
 package com.revature.project_0.models.accounts;
 
 import com.revature.project_0.models.Transaction;
+import com.revature.project_0.util.collections.Collection;
 import com.revature.project_0.util.collections.DoubleLinkedList;
 /**
  *      Possibly should be abstract with checking account and savings account classes
@@ -70,5 +71,17 @@ public abstract class Account {
     @Override
     public String toString() {
         return String.format("%s : " + (type.equals("C") ? "Checking" : "Savings") + " : $%.2f", name, currentBalance);
+    }
+
+    public final int getNumOfTransactions() {
+        return transactions.size();
+    }
+
+    public final void moveToTopOfTransactions() {
+        transactions.moveToTop();
+    }
+
+    public final void moveToBottomOfTransactions() {
+        transactions.moveToBottom();
     }
 }

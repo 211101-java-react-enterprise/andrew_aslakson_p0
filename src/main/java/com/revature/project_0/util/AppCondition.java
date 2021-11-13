@@ -1,9 +1,11 @@
 package com.revature.project_0.util;
 
 import com.revature.project_0.daos.AccountDAO;
+import com.revature.project_0.daos.TransactionDAO;
 import com.revature.project_0.daos.UserDAO;
 import com.revature.project_0.screens.*;
 import com.revature.project_0.services.AccountService;
+import com.revature.project_0.services.TransactionService;
 import com.revature.project_0.services.UserService;
 
 import java.io.BufferedReader;
@@ -17,6 +19,7 @@ public class AppCondition {
 
     private final UserService userService;
     private final AccountService accountService;
+    private final TransactionService transactionService;
 
     public AppCondition() {
         running = true;
@@ -25,6 +28,7 @@ public class AppCondition {
 
         userService = new UserService(new UserDAO());
         accountService = new AccountService(new AccountDAO());
+        transactionService = new TransactionService(new TransactionDAO());
 
         // TODO add MORE Menus here!
         navigator.addMenu(new WelcomeMenu(reader, navigator));
@@ -35,6 +39,10 @@ public class AppCondition {
         navigator.addMenu(new EndSessionMenu(reader, navigator));
         navigator.addMenu(new AccountViewerMenu(reader, navigator, userService, accountService));
         navigator.addMenu(new AccountCreationMenu(reader, navigator, userService, accountService));
+        navigator.addMenu(new BalanceViewerMenu(reader, navigator, accountService, transactionService));
+        navigator.addMenu(new AccountActionMenu(reader, navigator, accountService));
+        navigator.addMenu(new WithdrawalMenu(reader, navigator, accountService, transactionService));
+        navigator.addMenu(new DepositMenu(reader, navigator, accountService, transactionService));
 
     }
 

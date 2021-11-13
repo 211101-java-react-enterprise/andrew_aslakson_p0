@@ -35,14 +35,14 @@ public class AccountViewerMenu extends Menu {
         for (int i = 0; i < accounts.size(); i++) {
             System.out.println(Integer.toString(i) + ")|| " + accounts.next().toString());
         }
-
+        System.out.println("\\-----------------------------/");
         System.out.println("Which account would you like to view?");
         System.out.print(">> ");
 
         String input = consoleReader.readLine();
 
-        accountService.setCurrentAccount(accounts.get(Integer.parseInt(input) - 1));
+        accountService.setCurrentAccount(accounts.get(Integer.parseInt(input)));
 
-        navigator.navigateTo("/balance_viewer");
+        navigator.navigateTo("/account_action");
     }
 }

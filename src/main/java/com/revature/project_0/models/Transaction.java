@@ -1,6 +1,6 @@
 package com.revature.project_0.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Transaction {
     String transactionUUID;
@@ -13,7 +13,11 @@ public class Transaction {
     private double newBalance;
     private double oldBalance;
 
-    Transaction(boolean type, Date date, double amount, double oldBalance) {
+    private final String RED_TEXT = "\u001B[31m";
+    private final String GREEN_TEXT = "\u001B[32m";
+    private final String RESET_TEXT = "\u001B[0m";
+
+    public Transaction(boolean type, Date date, double amount, double oldBalance) {
         this.type = type;
         this.dateTime = date;
 
@@ -62,5 +66,15 @@ public class Transaction {
     public void setOldBalance(double oldBalance) {
         this.oldBalance = oldBalance;
     }
-    
+
+    @Override
+    public String toString() {
+        //       #) || Date & Time of transaction : Type  : Amount : Current Balance
+        return String.format(" %s : %s $%.2f%s : $%.2f",
+                dateTime.toString(),
+                type ? "Deposit :" + GREEN_TEXT : "Withdrawl :" + RED_TEXT,
+                amount,
+                RESET_TEXT,
+                newBalance);
+    }
 }
