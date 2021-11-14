@@ -1,13 +1,14 @@
 package com.revature.project_0.models;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Transaction {
-    String transactionUUID;
-    String accountUUID;
+    private String transactionUUID;
+
+    private String accountUUID;
 
     private boolean type; // true is deposit, false is withdrawl
-    private Date dateTime;
+    private Timestamp dateTime;
 
     private double amount;
     private double newBalance;
@@ -17,7 +18,7 @@ public class Transaction {
     private final String GREEN_TEXT = "\u001B[32m";
     private final String RESET_TEXT = "\u001B[0m";
 
-    public Transaction(boolean type, Date date, double amount, double oldBalance) {
+    public Transaction(boolean type, Timestamp date, double amount, double oldBalance) {
         this.type = type;
         this.dateTime = date;
 
@@ -35,11 +36,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public Date getDateTime() {
+    public Timestamp getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -67,6 +68,22 @@ public class Transaction {
         this.oldBalance = oldBalance;
     }
 
+    public String getAccountUUID() {
+        return accountUUID;
+    }
+
+    public void setAccountUUID(String accountUUID) {
+        this.accountUUID = accountUUID;
+    }
+
+    public String getTransactionUUID() {
+        return transactionUUID;
+    }
+
+    public void setTransactionUUID(String transactionUUID) {
+        this.transactionUUID = transactionUUID;
+    }
+
     @Override
     public String toString() {
         //       #) || Date & Time of transaction : Type  : Amount : Current Balance
@@ -77,4 +94,5 @@ public class Transaction {
                 RESET_TEXT,
                 newBalance);
     }
+
 }

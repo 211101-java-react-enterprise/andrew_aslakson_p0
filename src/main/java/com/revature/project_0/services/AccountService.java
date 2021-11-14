@@ -52,4 +52,8 @@ public class AccountService {
         if (account.getName().trim().equals("") || account.getName() == null) return false;
         return account.getType() != null;
     }
+
+    public boolean updateBalance(double newBalance) {
+        return accountDAO.updateBalance(newBalance, currentAccount.getAccountUUID());
+    }
 }

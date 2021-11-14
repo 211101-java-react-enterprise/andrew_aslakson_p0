@@ -7,10 +7,8 @@ import com.revature.project_0.models.accounts.SavingsAccount;
 import com.revature.project_0.util.collections.TraversingList;
 import com.revature.project_0.util.connections.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.UUID;
 
 public class TransactionDAO implements CrudDAO<Transaction> {
 
@@ -18,7 +16,32 @@ public class TransactionDAO implements CrudDAO<Transaction> {
 
     }
     @Override
-    public Transaction save(Transaction newObj) {
+    public Transaction save(Transaction transaction) {
+        transaction.setTransactionUUID(UUID.randomUUID().toString());
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "insert into transactions (transaction_uuid, account_uuid, date_time, type_flag, amount, old_balance, new_balance) values (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, transaction.getTransactionUUID());
+            pstmt.setString(2, transaction.getAccountUUID());
+            pstmt.setTimestamp(3, transaction.getDateTime());
+            pstmt.setBoolean(4, transaction.isType());
+            pstmt.setDouble(5, transaction.getAmount());
+            pstmt.setDouble(6, transaction.getOldBalance());
+            pstmt.setDouble(7, transaction.getNewBalance());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+                return transaction;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
         return null;
     }
 

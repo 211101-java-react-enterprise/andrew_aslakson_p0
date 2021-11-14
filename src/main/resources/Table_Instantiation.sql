@@ -135,7 +135,7 @@ values ('862074b5-ad9d-4a9a-bd95-86f2599a8544', '7a045195-f2e2-4174-aa48-c657aaf
 
 -- Example query to get all accounts associated with user_uuid
 /*
-select a.account_uuid, a.type, a.account_name, a.current_balance 
+select a.account_uuid, a.type, a.account_name, a.current_balance
 from user_accounts ua
 join accounts a
 on a.account_uuid = ua.account_uuid
@@ -177,12 +177,17 @@ values ('0c26eaf3-f016-4838-8784-52fed8ba5e03', '862074b5-ad9d-4a9a-bd95-86f2599
 -- Example query for getting all transactions associated with account
 /*
 select t.date_time, t.type_flag, t.amount, t.old_balance, t.new_balance
-from transactions t 
+from transactions t
 where account_uuid = ?
 order by date_time;
 */
 
-
+-- Example query for updating current_balance of accounts table
+/*
+update accounts
+set current_balance = ?
+where account_uuid = ?;
+*/
 
 
 

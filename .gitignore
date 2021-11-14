@@ -8,3 +8,6 @@ out/
 *.class
 *.jar
 target/
+
+# unwanted logs
+*.log

@@ -76,7 +76,8 @@ public class AccountDAO implements CrudDAO<Account>{
         return null;
     }
 
-    //This should be run right after saving
+    // This should be run right after saving
+    // TODO implement this in save function
     public boolean linkAccountToUser(String userUUID, String accountUUID) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -162,5 +163,26 @@ public class AccountDAO implements CrudDAO<Account>{
         }
 
         return null;
+    }
+
+    public boolean updateBalance(double newBalance, String accountUUID) {
+
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "update accounts set current_balance = ? where account_uuid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setDouble(1, newBalance);
+            pstmt.setString(2, accountUUID);
+
+            if (pstmt.executeUpdate() != 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
