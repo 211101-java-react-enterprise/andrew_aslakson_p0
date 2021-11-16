@@ -41,20 +41,26 @@ public class BalanceViewerMenu extends Menu {
     @Override
     public void render() throws Exception {
 
-        //Populate currentAccount with Transactions from DB
-        transactionService.populateTransactions(accountService.getCurrentAccount());
-        accountService.getCurrentAccount().moveToTopOfTransactions();
+        try {
+            //Populate currentAccount with Transactions from DB
+            transactionService.populateTransactions(accountService.getCurrentAccount());
+            accountService.getCurrentAccount().moveToTopOfTransactions();
 
-        System.out.println("/-----------------------------\\");
-        System.out.println("       Transaction History");
+            System.out.println("/-----------------------------\\");
+            System.out.println("       Transaction History");
 
-        System.out.println("#) || Date & Time of transaction : Type  : Amount : Current Balance");
-        for (int i = 0; i < accountService.getCurrentAccount().getNumOfTransactions(); i++) {
-            System.out.println(Integer.toString(i) + ")|| " + accountService.getCurrentAccount().getPrevTransaction().toString());
+            System.out.println("#) || Date & Time of transaction : Type  : Amount : Current Balance");
+            for (int i = 0; i < accountService.getCurrentAccount().getNumOfTransactions(); i++) {
+                System.out.println(Integer.toString(i) + ")|| " + accountService.getCurrentAccount().getPrevTransaction().toString());
+            }
+            System.out.println("\\-----------------------------/");
+            System.out.println("Press enter to return to User menu");
+            System.out.print(">> ");
+            consoleReader.readLine();
+
+        } catch (Exception e) {
+            System.out.println("Transaction history failed to load for current account");
         }
-        System.out.println("\\-----------------------------/");
-        System.out.println("Press enter to return to User menu");
-        System.out.print(">> ");
 
     }
 

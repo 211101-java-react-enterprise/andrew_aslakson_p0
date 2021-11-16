@@ -4,6 +4,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * Follows Singleton Design pattern so we can only have a single
+ * instance of this class
+ *
+ * Basic logger, writes to resource/app.log
+ *
+ * takes in boolean parameter that is used to determine whether logs are printed to console or not
+ * This boolean is hard-coded in the constructor and should be turned off for final builds
+ */
+
 public class Logger {
 
     //0000000000000000000000000000000000000000000000000
@@ -11,7 +21,8 @@ public class Logger {
     private static final String ANSI_RESET = "\u001b[0m";
     private static final String ANSI_YELLOW = "\u001b[33m";
 
-    private static Logger logger;
+    //Hard-coded printToConsole variable
+    private static final Logger logger = new Logger(true);
     private final boolean printToConsole;
 
     //0000000000000000000000000000000000000000000000000
@@ -23,13 +34,6 @@ public class Logger {
     }
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-
-    //-------------------------------------------------
-
-    // Hard coded printToConsole variable
-    static {
-        logger = new Logger(true);
-    }
 
     //-------------------------------------------------
 
@@ -76,6 +80,12 @@ public class Logger {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //-------------------------------------------------
+
+    public boolean isPrintToConsole() {
+        return printToConsole;
     }
 
     //-------------------------------------------------

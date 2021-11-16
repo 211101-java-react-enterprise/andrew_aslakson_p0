@@ -55,13 +55,28 @@ public class DepositMenu extends Menu {
         Transaction transaction = new Transaction(true, new Timestamp(System.currentTimeMillis()), Double.parseDouble(amount),accountService.getCurrentAccount().getCurrentBalance());
         transaction.setAccountUUID(accountService.getCurrentAccount().getAccountUUID());
 
-        Transaction verifiedTransaction = transactionService.register(transaction);
+        try {
+            Transaction verifiedTransaction = transactionService.register(transaction);
+            accountService.getCurrentAccount().setCurrentBalance(verifiedTransaction.getNewBalance());
 
-        if (verifiedTransaction != null) {
-            System.out.println("Transaction Persisted to Database Successfully!");
-            if (accountService.updateBalance(verifiedTransaction.getNewBalance())) {
-                System.out.println("Balance on account updated successfully!");
+            if (verifiedTransaction != null) {
+                System.out.println("Transaction Saved Successfully!");
+
+                try {
+                    if (accountService.updateBalance(verifiedTransaction.getNewBalance())) {
+                        System.out.println("Balance on account updated successfully!");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Big Error, user doesn't enter this information");
+                    System.out.println("something went horribly wrong when attempting");
+                    System.out.println("to update balance on account");
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Transaction failed!");
+            System.out.println("Please note:");
+            System.out.println("Transaction values must not be negative");
+            System.out.println("and you may not overdraw your account");
         }
 
     }

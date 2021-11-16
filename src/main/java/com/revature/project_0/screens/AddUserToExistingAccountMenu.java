@@ -66,17 +66,31 @@ public class AddUserToExistingAccountMenu extends Menu {
                           username, password);
         */
         User tempCurrentUser = userService.getCurrentUser();
-        userService.authenticate(username, password);
 
-        if (userService.getCurrentUser() != null) {
-            if (accountService.linkAccountToUser(accountService.getCurrentAccount().getAccountUUID(), userService.getCurrentUser().getUserUUID())) {
-                System.out.printf("User: %s now has access to account: %s\n",
-                        userService.getCurrentUser().getUsername(),
-                        accountService.getCurrentAccount().getName());
+        try {
+            userService.authenticate(username, password);
+            System.out.println("Second User logged in successfully");
+
+            if (userService.getCurrentUser() != null) {
+
+                try {
+                    if (accountService.linkAccountToUser(accountService.getCurrentAccount().getAccountUUID(), userService.getCurrentUser().getUserUUID())) {
+                        System.out.printf("User: %s now has access to account: %s\n",
+                                userService.getCurrentUser().getUsername(),
+                                accountService.getCurrentAccount().getName());
+                    }
+                } catch (Exception e) {
+                    System.out.println("User authenticated but changes failed to commit to database!");
+                    System.out.println(" Please Note, cannot add users that already are on account");
+                    System.out.println(" to account again.");
+                }
             }
-        } else {
-            System.out.println("User authenticated but changes failed to commit to database!");
+
+        } catch (Exception e) {
+            System.out.println("Invalid credentials provided for");
+            System.out.println("second user login");
         }
+
         userService.setCurrentUser(tempCurrentUser);
 
     }

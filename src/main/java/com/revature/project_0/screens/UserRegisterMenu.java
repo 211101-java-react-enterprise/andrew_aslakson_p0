@@ -54,8 +54,16 @@ public class UserRegisterMenu extends Menu {
 
         User newUser = new User(firstName, lastName, email, username, password);
 
-        userService.register(newUser);
-        System.out.println("User persisted to database.");
+        try {
+            userService.register(newUser);
+            System.out.println("New User registered successfully!");
+        }
+        catch(Exception e){
+            System.out.println("Failed to create new User account: ");
+            System.out.println("   All user data must not be empty and");
+            System.out.println("   username and email must be unique.");
+        }
+
     }
 
     //-------------------------------------------------

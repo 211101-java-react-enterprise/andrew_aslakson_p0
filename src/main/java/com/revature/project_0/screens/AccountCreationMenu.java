@@ -66,9 +66,18 @@ public class AccountCreationMenu extends Menu{
 
         }
 
-        accountService.register(newAccount, userService.getCurrentUser().getUserUUID());
+        try {
+            accountService.register(newAccount, userService.getCurrentUser().getUserUUID());
+            System.out.println("Account Persisted Successfully!");
 
-        System.out.println("Account Persisted Successfully!");
+        } catch (Exception e) {
+            System.out.println("Account creation failed:");
+            System.out.println("   Please note a user cannot");
+            System.out.println("   have two accounts with the");
+            System.out.println("   same name.");
+
+        }
+
 
     }
 

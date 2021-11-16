@@ -48,6 +48,9 @@ public class ConnectionFactory {
 
     //Note constructor is private, cannot create additional instances of this class
     private ConnectionFactory() {
+
+        logger = Logger.getLogger();
+
         try {
             props.load(new FileReader("src/main/resources/db.properties"));
             logger.log("db.properties loaded successfully");

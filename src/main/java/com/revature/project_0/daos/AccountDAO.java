@@ -88,7 +88,7 @@ public class AccountDAO implements CrudDAO<Account>{
             logger.log("SQL error failed to access database");
             logger.log(e.getMessage());
 
-            e.printStackTrace();
+            if (logger.isPrintToConsole()) e.printStackTrace();
         }
 
         logger.log("Failed to find accounts");
@@ -129,7 +129,7 @@ public class AccountDAO implements CrudDAO<Account>{
             logger.log("SQL failed to execute properly");
             logger.log(e.getMessage());
 
-            e.printStackTrace();
+            if (logger.isPrintToConsole()) e.printStackTrace();
         }
 
         logger.log("Account save failed");
@@ -167,7 +167,7 @@ public class AccountDAO implements CrudDAO<Account>{
             logger.log("SQL exception thrown when attempting to link user to account");
             logger.log(e.getMessage());
 
-            e.printStackTrace();
+            if (logger.isPrintToConsole()) e.printStackTrace();
         }
 
         logger.log("failed to persist user to account link");
@@ -233,7 +233,7 @@ public class AccountDAO implements CrudDAO<Account>{
             logger.log("SQL exception thrown:");
             logger.log(e.getMessage());
 
-            e.printStackTrace();
+            if (logger.isPrintToConsole()) e.printStackTrace();
         }
 
         logger.log("User does not have account with given name");
@@ -291,7 +291,7 @@ public class AccountDAO implements CrudDAO<Account>{
             logger.log("SQL exception occured when attempting to update account balance");
             logger.log(e.getMessage());
 
-            e.printStackTrace();
+            if (logger.isPrintToConsole()) e.printStackTrace();
         }
 
         logger.log("Balance update failed");

@@ -2,8 +2,6 @@ package com.revature.project_0.daos;
 
 import com.revature.project_0.models.Transaction;
 import com.revature.project_0.models.accounts.Account;
-import com.revature.project_0.models.accounts.CheckingAccount;
-import com.revature.project_0.models.accounts.SavingsAccount;
 import com.revature.project_0.util.collections.TraversingList;
 import com.revature.project_0.util.connections.ConnectionFactory;
 import com.revature.project_0.util.logger.Logger;
@@ -82,7 +80,7 @@ public class TransactionDAO implements CrudDAO<Transaction> {
             logger.log("SQL statement failed execution");
             logger.log(e.getMessage());
 
-            e.printStackTrace();
+            if (logger.isPrintToConsole()) e.printStackTrace();
         }
 
         logger.log("failed to persist transaction to database");
@@ -152,7 +150,7 @@ public class TransactionDAO implements CrudDAO<Transaction> {
             logger.log("SQL exception occured");
             logger.log(e.getMessage());
 
-            e.printStackTrace();
+            if (logger.isPrintToConsole()) e.printStackTrace();
         }
     }
 

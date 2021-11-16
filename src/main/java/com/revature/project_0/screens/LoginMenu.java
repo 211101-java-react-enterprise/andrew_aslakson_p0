@@ -48,20 +48,16 @@ public class LoginMenu extends Menu {
 
         System.out.println("\\----------------------------------/");
 
-        //DEBUG OUTPUT
-        /*
-        System.out.println("Provided user credentials:");
-        System.out.printf("Username: %s\n" +
-                          "Password: %s\n",
-                          username, password);
-        */
+        try {
+            userService.authenticate(username, password);
 
-        userService.authenticate(username, password);
-
-        if (userService.getCurrentUser() != null) {
-            navigator.navigateTo("/user_menu");
-        } else {
-            System.out.println("Could not verify user credentials!");
+            if (userService.getCurrentUser() != null) {
+                navigator.navigateTo("/user_menu");
+            } else {
+                System.out.println("Could not verify user credentials!");
+            }
+        } catch (Exception e) {
+            System.out.println("User verification failed!");
         }
     }
 
