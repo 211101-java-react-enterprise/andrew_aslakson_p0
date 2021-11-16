@@ -4,6 +4,7 @@ import com.revature.project_0.daos.UserDAO;
 import com.revature.project_0.exceptions.InvalidCredentialException;
 import com.revature.project_0.exceptions.ResourcePersistenceException;
 import com.revature.project_0.models.User;
+import com.revature.project_0.util.logger.Logger;
 
 /**
  *      UserService class holds methods and logic pertaining to
@@ -21,12 +22,15 @@ public class UserService {
     private UserDAO userDAO;
     private User currentUser;
 
+    private Logger logger;
+
     //0000000000000000000000000000000000000000000000000
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
+        logger = Logger.getLogger();
     }
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC

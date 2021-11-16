@@ -3,6 +3,7 @@ package com.revature.project_0.daos;
 import com.revature.project_0.models.User;
 import com.revature.project_0.util.connections.ConnectionFactory;
 import com.revature.project_0.util.collections.TraversingList;
+import com.revature.project_0.util.logger.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,6 +28,8 @@ public class UserDAO implements CrudDAO<User> {
 
     private static UserDAO userDao;
 
+    private Logger logger;
+
     //0000000000000000000000000000000000000000000000000
 
     static {
@@ -36,6 +39,7 @@ public class UserDAO implements CrudDAO<User> {
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     private UserDAO() {
+        logger = Logger.getLogger();
 
     }
 

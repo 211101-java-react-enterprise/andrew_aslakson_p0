@@ -6,6 +6,7 @@ import com.revature.project_0.models.accounts.SavingsAccount;
 import com.revature.project_0.util.connections.ConnectionFactory;
 import com.revature.project_0.util.collections.DoubleLinkedList;
 import com.revature.project_0.util.collections.TraversingList;
+import com.revature.project_0.util.logger.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,6 +31,8 @@ public class AccountDAO implements CrudDAO<Account>{
 
     private static AccountDAO accountDao;
 
+    private Logger logger;
+
     //0000000000000000000000000000000000000000000000000
 
     static {
@@ -39,7 +42,7 @@ public class AccountDAO implements CrudDAO<Account>{
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     private AccountDAO() {
-
+        logger = Logger.getLogger();
     }
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC

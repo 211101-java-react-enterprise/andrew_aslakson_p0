@@ -3,6 +3,7 @@ package com.revature.project_0.services;
 import com.revature.project_0.daos.AccountDAO;
 import com.revature.project_0.models.accounts.Account;
 import com.revature.project_0.util.collections.DoubleLinkedList;
+import com.revature.project_0.util.logger.Logger;
 
 /**
  *      AccountService Holds relevant information and logic to verify user
@@ -17,8 +18,9 @@ public class AccountService {
     //0000000000000000000000000000000000000000000000000
 
     private AccountDAO accountDAO;
-
     private Account currentAccount;
+
+    private Logger logger;
 
     //0000000000000000000000000000000000000000000000000
 
@@ -26,6 +28,7 @@ public class AccountService {
 
     public AccountService(AccountDAO accountDAO) {
         this.accountDAO = accountDAO;
+        logger = Logger.getLogger();
     }
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC

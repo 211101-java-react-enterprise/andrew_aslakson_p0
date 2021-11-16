@@ -5,6 +5,7 @@ import com.revature.project_0.exceptions.InvalidCredentialException;
 import com.revature.project_0.exceptions.ResourcePersistenceException;
 import com.revature.project_0.models.Transaction;
 import com.revature.project_0.models.accounts.Account;
+import com.revature.project_0.util.logger.Logger;
 
 /**
  *      Transaction service is a class that ensures user entered data integrity
@@ -18,13 +19,15 @@ public class TransactionService {
 
     private TransactionDAO transactionDAO;
 
+    private Logger logger;
+
     //0000000000000000000000000000000000000000000000000
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public TransactionService(TransactionDAO transactionDAO) {
         this.transactionDAO = transactionDAO;
-
+        logger = Logger.getLogger();
     }
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
