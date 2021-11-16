@@ -58,6 +58,8 @@ public class TransactionDAO implements CrudDAO<Transaction> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            logger.log("attempting to save Transaction to database");
+
             String sql = "insert into transactions (transaction_uuid, account_uuid, date_time, type_flag, amount, old_balance, new_balance) values (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, transaction.getTransactionUUID());
@@ -71,13 +73,19 @@ public class TransactionDAO implements CrudDAO<Transaction> {
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted != 0) {
+                logger.log("Transaction persisted to database");
+
                 return transaction;
             }
 
         } catch (SQLException e) {
+            logger.log("SQL statement failed execution");
+            logger.log(e.getMessage());
+
             e.printStackTrace();
         }
 
+        logger.log("failed to persist transaction to database");
 
         return null;
     }
@@ -114,6 +122,9 @@ public class TransactionDAO implements CrudDAO<Transaction> {
 
     public void populateTransactions(Account currentAccount) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            logger.log("Attempting to populate transactions for currentAccount");
+
             String sql = "select t.date_time, t.type_flag, t.amount, t.old_balance, t.new_balance " +
                          "from transactions t " +
                          "where account_uuid = ? " +
@@ -134,7 +145,13 @@ public class TransactionDAO implements CrudDAO<Transaction> {
 
 
             }
+
+            logger.log("Transactions populated in currentAccount");
+
         } catch (SQLException e) {
+            logger.log("SQL exception occured");
+            logger.log(e.getMessage());
+
             e.printStackTrace();
         }
     }

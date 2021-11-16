@@ -60,6 +60,9 @@ public class AccountDAO implements CrudDAO<Account>{
         DoubleLinkedList<Account> results = new DoubleLinkedList<>();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            logger.log("Beginning to search for available accounts associated with currentUser");
+
             String sql = "select a.account_uuid, a.type, a.account_name, a.current_balance " +
                          "from user_accounts ua " +
                          "join accounts a " +
@@ -72,22 +75,23 @@ public class AccountDAO implements CrudDAO<Account>{
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                /*
-                if (rs.getString("type").equals("C")) {
-                    results.add(new CheckingAccount(rs.getString("account_name"), rs.getDouble("current_balance")));
-
-                } else {
-                    results.add(new SavingsAccount(rs.getString("account_name"), rs.getDouble("current_balance")));
-                }
-                */
                 results.add(createAccountFromResultsSet(rs));
 
             }
+
+            logger.log("accounts found and created successfully");
+
             return results;
 
         } catch (SQLException e) {
+
+            logger.log("SQL error failed to access database");
+            logger.log(e.getMessage());
+
             e.printStackTrace();
         }
+
+        logger.log("Failed to find accounts");
 
         return null;
     }
@@ -100,6 +104,8 @@ public class AccountDAO implements CrudDAO<Account>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            logger.log("Attempting to save new account");
+
             String sql = "insert into accounts (account_uuid, type, account_name, current_balance) values (?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newAccount.getAccountUUID());
@@ -110,13 +116,23 @@ public class AccountDAO implements CrudDAO<Account>{
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted != 0) {
+
+                logger.log("Account saved to database successfully");
+
                 return newAccount;
             }
 
+            logger.log("Failed to save account to database");
+
         } catch (SQLException e) {
+
+            logger.log("SQL failed to execute properly");
+            logger.log(e.getMessage());
+
             e.printStackTrace();
         }
 
+        logger.log("Account save failed");
 
         return null;
     }
@@ -129,6 +145,8 @@ public class AccountDAO implements CrudDAO<Account>{
     public boolean linkAccountToUser(String userUUID, String accountUUID) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            logger.log("Attempting to link account to currentUser");
+
             String sql = "insert into user_accounts (account_uuid, user_uuid) values (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, accountUUID);
@@ -137,12 +155,23 @@ public class AccountDAO implements CrudDAO<Account>{
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted != 0) {
+
+                logger.log("Link persisted to database");
+
                 return true;
             }
 
+            logger.log("Failed to persist link to database");
+
         } catch (SQLException e) {
+            logger.log("SQL exception thrown when attempting to link user to account");
+            logger.log(e.getMessage());
+
             e.printStackTrace();
         }
+
+        logger.log("failed to persist user to account link");
+
         return false;
     }
 
@@ -179,6 +208,8 @@ public class AccountDAO implements CrudDAO<Account>{
     public boolean doesUserIDHaveAccountName(String userUUID, String name) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            logger.log("Attempting to check if user already has an account with given name");
+
             String sql = "select ua.user_uuid, a.account_uuid, a.type, a.account_name, a.current_balance " +
                          "from user_accounts ua " +
                          "join accounts a " +
@@ -192,11 +223,20 @@ public class AccountDAO implements CrudDAO<Account>{
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
+
+                logger.log("User has account with given account name already!");
+
                 return true;
             }
         } catch (SQLException e) {
+
+            logger.log("SQL exception thrown:");
+            logger.log(e.getMessage());
+
             e.printStackTrace();
         }
+
+        logger.log("User does not have account with given name");
 
         return false;
     }
@@ -232,6 +272,8 @@ public class AccountDAO implements CrudDAO<Account>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            logger.log("Attempting to update balance on currentAccount in database");
+
             String sql = "update accounts set current_balance = ? where account_uuid = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -239,11 +281,20 @@ public class AccountDAO implements CrudDAO<Account>{
             pstmt.setString(2, accountUUID);
 
             if (pstmt.executeUpdate() != 0) {
+
+                logger.log("Update to currentAccount persisted to database successfully");
+
                 return true;
             }
         } catch (SQLException e) {
+
+            logger.log("SQL exception occured when attempting to update account balance");
+            logger.log(e.getMessage());
+
             e.printStackTrace();
         }
+
+        logger.log("Balance update failed");
 
         return false;
     }
