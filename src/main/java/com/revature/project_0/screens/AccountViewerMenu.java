@@ -8,11 +8,27 @@ import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
 
+/**
+ *      AccountViewerMenu allows a logged in user to choose which
+ *      account they would like access too.
+ *
+ *      we leverage the accountService and therefore our AccountDAO to pull
+ *      information regarding accounts from the database
+ *
+ *      currentUser should be set to a valid instance before viewing this screen
+ */
+
 public class AccountViewerMenu extends Menu {
+
+    //0000000000000000000000000000000000000000000000000
 
     private UserService userService;
     private AccountService accountService;
     private DoubleLinkedList<Account> accounts;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public AccountViewerMenu(BufferedReader consoleReader, Navigator navigator, UserService userService, AccountService accountService) {
         super("Account Viewer", "/account_viewer", consoleReader, navigator);
@@ -21,6 +37,10 @@ public class AccountViewerMenu extends Menu {
 
         accounts = new DoubleLinkedList<>();
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -45,4 +65,7 @@ public class AccountViewerMenu extends Menu {
 
         navigator.navigateTo("/account_action");
     }
+
+    //-------------------------------------------------
+
 }

@@ -1,6 +1,16 @@
 package com.revature.project_0.models;
 
+/**
+ *      User class is a data model that encapsulates necessary
+ *      data about a user
+ *
+ *      Primarily stores data and has getters and setters for that data
+ */
+
 public class User {
+
+    //0000000000000000000000000000000000000000000000000
+
     private String userUUID;
 
     private String firstName;
@@ -8,6 +18,10 @@ public class User {
     private String email;
     private String username;
     private String password;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public User(String firstName, String lastName, String email, String username, String password) {
         this.firstName = firstName;
@@ -18,6 +32,10 @@ public class User {
 
     }
 
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
+
     public String getUserUUID() {
         return userUUID;
     }
@@ -25,6 +43,8 @@ public class User {
     public void setUserUUID(String userUUID) {
         this.userUUID = userUUID;
     }
+
+    //-------------------------------------------------
 
     public String getFirstName() {
         return firstName;
@@ -34,6 +54,8 @@ public class User {
         this.firstName = firstName;
     }
 
+    //-------------------------------------------------
+
     public String getLastName() {
         return lastName;
     }
@@ -41,6 +63,8 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    //-------------------------------------------------
 
     public String getEmail() {
         return email;
@@ -50,6 +74,8 @@ public class User {
         this.email = email;
     }
 
+    //-------------------------------------------------
+
     public String getUsername() {
         return username;
     }
@@ -58,6 +84,8 @@ public class User {
         this.username = username;
     }
 
+    //-------------------------------------------------
+
     public String getPassword() {
         return password;
     }
@@ -65,4 +93,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    //-------------------------------------------------
+
 }

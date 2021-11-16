@@ -5,14 +5,35 @@ import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
 
+/**
+ *      This menu is where a user logs into the application
+ *
+ *      An instance of userService is included to perform
+ *      the logic of authenticating a user
+ *
+ *      userService.currentUser is also set when we call
+ *      userService.authenticate()
+ */
+
 public class LoginMenu extends Menu {
+
+    //0000000000000000000000000000000000000000000000000
+
     private UserService userService;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public LoginMenu(BufferedReader consoleReader, Navigator navigator, UserService userService) {
         super("Login Menu", "/login", consoleReader, navigator);
         this.userService = userService;
 
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -40,7 +61,10 @@ public class LoginMenu extends Menu {
         if (userService.getCurrentUser() != null) {
             navigator.navigateTo("/user_menu");
         } else {
-            navigator.navigateTo("/main_menu");
+            System.out.println("Could not verify user credentials!");
         }
     }
+
+    //-------------------------------------------------
+
 }

@@ -6,11 +6,25 @@ import java.io.BufferedReader;
 
 import static com.revature.project_0.util.AppCondition.shutdown;
 
+/**
+ *      This menu is the first menu a user sees after the welcome screen
+ *
+ *      it allows a user to select between creating a new user, logging
+ *      in as a new user or exiting the application
+ *
+ */
+
 public class MainMenu extends Menu {
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public MainMenu(BufferedReader consoleReader, Navigator navigator) {
         super("Main Menu", "/main_menu", consoleReader, navigator);
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -43,4 +57,7 @@ public class MainMenu extends Menu {
 
         }
     }
+
+    //-------------------------------------------------
+
 }

@@ -10,11 +10,45 @@ import com.revature.project_0.util.connections.ConnectionFactory;
 import java.sql.*;
 import java.util.UUID;
 
+/**
+ *      Follows Singleton Design pattern
+ *          -Only one instance of this object can exist!
+ *
+ *      performs sql queries related to Transactions, data should
+ *      be verified before entering this class!
+ *
+ *      Used for populating transactions in an account and
+ *      when making deposits and withdrawals.
+ */
+
 public class TransactionDAO implements CrudDAO<Transaction> {
 
-    public  TransactionDAO() {
+    //0000000000000000000000000000000000000000000000000
+
+    private static TransactionDAO transactionDao;
+
+    //0000000000000000000000000000000000000000000000000
+
+    static {
+        transactionDao = new TransactionDAO();
+    }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    private TransactionDAO() {
 
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
+
+    static public TransactionDAO getInstance(){
+        return transactionDao;
+    }
+
+    //-------------------------------------------------
+
     @Override
     public Transaction save(Transaction transaction) {
         transaction.setTransactionUUID(UUID.randomUUID().toString());
@@ -45,25 +79,35 @@ public class TransactionDAO implements CrudDAO<Transaction> {
         return null;
     }
 
+    //-------------------------------------------------
+
     @Override
     public TraversingList<Transaction> findAll() {
         return null;
     }
+
+    //-------------------------------------------------
 
     @Override
     public Transaction findById(String id) {
         return null;
     }
 
+    //-------------------------------------------------
+
     @Override
     public boolean update(Transaction updatedObj) {
         return false;
     }
 
+    //-------------------------------------------------
+
     @Override
     public boolean removeById(String id) {
         return false;
     }
+
+    //-------------------------------------------------
 
     public void populateTransactions(Account currentAccount) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -91,4 +135,7 @@ public class TransactionDAO implements CrudDAO<Transaction> {
             e.printStackTrace();
         }
     }
+
+    //-------------------------------------------------
+
 }

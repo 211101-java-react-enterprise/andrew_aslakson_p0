@@ -4,11 +4,21 @@ import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
 
+/**
+ *      This menu is simply a welcome greeting
+ */
+
 public class WelcomeMenu extends Menu {
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public WelcomeMenu(BufferedReader consoleReader, Navigator navigator) {
         super("Welcome Menu", "/welcome", consoleReader, navigator);
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -25,4 +35,7 @@ public class WelcomeMenu extends Menu {
         navigator.navigateTo("/main_menu");
 
     }
+
+    //-------------------------------------------------
+
 }

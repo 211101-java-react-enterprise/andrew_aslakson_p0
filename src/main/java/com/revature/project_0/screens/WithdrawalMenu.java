@@ -8,10 +8,25 @@ import com.revature.project_0.util.Navigator;
 import java.io.BufferedReader;
 import java.sql.Timestamp;
 
+/**
+ *      The Withdrawal Menu allows a user to make a withdrawl from
+ *      an existing account
+ *
+ *      Note: when a user is on this screen both currentUser from
+ *      userService and currentAccount from accountService should
+ *      have valid instances inside them.
+ */
+
 public class WithdrawalMenu extends Menu {
+
+    //0000000000000000000000000000000000000000000000000
 
     private AccountService accountService;
     private TransactionService transactionService;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public WithdrawalMenu(BufferedReader consoleReader, Navigator navigator, AccountService accountService, TransactionService transactionService) {
         super("Withdrawal", "/withdrawal", consoleReader, navigator);
@@ -19,6 +34,10 @@ public class WithdrawalMenu extends Menu {
         this.transactionService = transactionService;
 
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -46,4 +65,7 @@ public class WithdrawalMenu extends Menu {
         }
 
     }
+
+    //-------------------------------------------------
+
 }

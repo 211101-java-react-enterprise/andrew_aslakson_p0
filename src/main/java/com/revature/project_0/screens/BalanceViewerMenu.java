@@ -6,10 +6,26 @@ import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
 
+/**
+ *      BalanceViewerMenu displays transactions relevant to
+ *      the accountService.getCurrentAccount() account
+ *
+ *      An AccountService and a TransactionService is leveraged to do this
+ *      Accounts don't know there transaction history until this point
+ *
+ *      accountService.currentAccount should be set when viewing this menu
+ */
+
 public class BalanceViewerMenu extends Menu {
+
+    //0000000000000000000000000000000000000000000000000
 
     private AccountService accountService;
     private TransactionService transactionService;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public BalanceViewerMenu(BufferedReader consoleReader, Navigator navigator, AccountService accountService, TransactionService transactionService) {
         super("Balance Viewer", "/balance_viewer", consoleReader, navigator);
@@ -17,6 +33,10 @@ public class BalanceViewerMenu extends Menu {
         this.transactionService = transactionService;
 
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -37,4 +57,7 @@ public class BalanceViewerMenu extends Menu {
         System.out.print(">> ");
 
     }
+
+    //-------------------------------------------------
+
 }

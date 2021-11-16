@@ -1,21 +1,32 @@
 package com.revature.project_0.screens;
 
 import com.revature.project_0.models.Transaction;
-import com.revature.project_0.models.accounts.Account;
 import com.revature.project_0.services.AccountService;
 import com.revature.project_0.services.TransactionService;
 import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.Calendar;
+
+/**
+ *      The Deposit Menu allows a user to make a deposit to
+ *      an existing account
+ *
+ *      Note: when a user is on this screen both currentUser from
+ *      userService and currentAccount from accountService should
+ *      have valid instances inside them.
+ */
 
 public class DepositMenu extends Menu {
 
+    //0000000000000000000000000000000000000000000000000
+
     private AccountService accountService;
     private TransactionService transactionService;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public DepositMenu(BufferedReader consoleReader, Navigator navigator, AccountService accountService, TransactionService transactionService) {
         super("Deposit", "/deposit", consoleReader, navigator);
@@ -23,6 +34,10 @@ public class DepositMenu extends Menu {
         this.transactionService = transactionService;
 
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -50,4 +65,7 @@ public class DepositMenu extends Menu {
         }
 
     }
+
+    //-------------------------------------------------
+
 }

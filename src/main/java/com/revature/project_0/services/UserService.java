@@ -5,16 +5,37 @@ import com.revature.project_0.exceptions.InvalidCredentialException;
 import com.revature.project_0.exceptions.ResourcePersistenceException;
 import com.revature.project_0.models.User;
 
+/**
+ *      UserService class holds methods and logic pertaining to
+ *      user entered data verification
+ *
+ *      This class also holds an instance of the UserDAO class
+ *      this class acts as an intermediary step for accessing
+ *      data persistence classes.
+ */
+
 public class UserService {
 
-    private UserDAO userDAO;
+    //0000000000000000000000000000000000000000000000000
 
+    private UserDAO userDAO;
     private User currentUser;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
+
+    //-------------------------------------------------
+
+    // Verifies user credentials and accesses userDAO to persist user in database
     public boolean register(User user) {
         if (!isUserValid(user)) {
             throw new InvalidCredentialException("Invalid user input.");
@@ -39,6 +60,9 @@ public class UserService {
         return false;
     }
 
+    //-------------------------------------------------
+
+    //Used during login scenarios
     public void authenticate(String username, String password) {
         if (!username.trim().equals("") && username != null && !password.trim().equals("") && password != null) {
             currentUser = userDAO.findUserByUsernameAndPassword(username, password);
@@ -46,18 +70,33 @@ public class UserService {
 
     }
 
+    //-------------------------------------------------
+
     public User getCurrentUser() {
         return currentUser;
     }
+
+    //-------------------------------------------------
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    //-------------------------------------------------
 
     public void endSession() {
         currentUser = null;
     }
 
+    //-------------------------------------------------
+
     public boolean isActiveUser() {
         return currentUser != null;
     }
 
+    //-------------------------------------------------
+
+    //Private method encapsulates necessary logic to determine if data is valid for database
     private boolean isUserValid(User user) {
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
@@ -66,5 +105,7 @@ public class UserService {
         if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
         return user.getPassword() != null && !user.getPassword().trim().equals("");
     }
+
+    //-------------------------------------------------
 
 }

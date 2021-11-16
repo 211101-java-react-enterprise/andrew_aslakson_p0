@@ -1,5 +1,10 @@
 package com.revature.project_0.util.collections;
 
+/**
+ *  Generic Collection interface, Defines Generic methods
+ *  for various types of collections
+ *
+ */
 public interface Collection<T> {
 
     boolean add(T elem);

@@ -9,15 +9,34 @@ import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
 
+/**
+ *      AccountCreationMenu allows a user to create a new account, it then leverages
+ *      accountService and therefore accountDAO to verify validity of user entered
+ *      information and persist that info to database
+ *
+ *      currentUser should be set before a user views this screen
+ */
+
 public class AccountCreationMenu extends Menu{
+
+    //0000000000000000000000000000000000000000000000000
+
     private UserService userService;
     private AccountService accountService;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public AccountCreationMenu(BufferedReader consoleReader, Navigator navigator, UserService userService, AccountService accountService) {
         super("Account Creation", "/account_creator", consoleReader, navigator);
         this.userService = userService;
         this.accountService = accountService;
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -52,4 +71,7 @@ public class AccountCreationMenu extends Menu{
         System.out.println("Account Persisted Successfully!");
 
     }
+
+    //-------------------------------------------------
+
 }

@@ -1,8 +1,11 @@
 package com.revature.project_0.util.connections;
 
-/*
-    Follows Singleton Design Pattern
-    Only 1 instance can exist
+/**
+ *  Follows Singleton Design Pattern
+ *      Only 1 instance can exist
+ *
+ *      creates database connections
+ *      relies on db.properties file
  */
 
 import java.io.FileReader;
@@ -14,8 +17,13 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
+    //0000000000000000000000000000000000000000000000000
+
+    //Holds private instance of ConnectionFactory
     private static final ConnectionFactory connectionFactory = new ConnectionFactory();
     private Properties props = new Properties();
+
+    //0000000000000000000000000000000000000000000000000
 
     // Just in case static block that forcibly loads postgresql driver
     static {
@@ -27,6 +35,9 @@ public class ConnectionFactory {
         }
     }
 
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //Note constructor is private, cannot create additional instances of this class
     private ConnectionFactory() {
         try {
             props.load(new FileReader("src/main/resources/db.properties"));
@@ -35,8 +46,16 @@ public class ConnectionFactory {
         }
     }
 
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
+
+    //used to access this class
     public static ConnectionFactory getInstance() {return connectionFactory;}
 
+    //-------------------------------------------------
+
+    //creates connection to database based on credentials in "src/main/resources/db.properties"
     public Connection getConnection() {
         Connection conn = null;
 
@@ -49,4 +68,7 @@ public class ConnectionFactory {
 
         return conn;
     }
+
+    //-------------------------------------------------
+
 }

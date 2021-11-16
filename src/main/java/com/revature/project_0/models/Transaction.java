@@ -2,7 +2,18 @@ package com.revature.project_0.models;
 
 import java.sql.Timestamp;
 
+/**
+ *      Transaction is a data model that stores information
+ *      pertaining to a specific transaction
+ *
+ *      Includes overridden toString() method that formats
+ *      object information to be suitable for this program
+ */
+
 public class Transaction {
+
+    //0000000000000000000000000000000000000000000000000
+
     private String transactionUUID;
 
     private String accountUUID;
@@ -18,6 +29,10 @@ public class Transaction {
     private final String GREEN_TEXT = "\u001B[32m";
     private final String RESET_TEXT = "\u001B[0m";
 
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
     public Transaction(boolean type, Timestamp date, double amount, double oldBalance) {
         this.type = type;
         this.dateTime = date;
@@ -28,6 +43,10 @@ public class Transaction {
 
     }
 
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
+
     public boolean isType() {
         return type;
     }
@@ -35,6 +54,8 @@ public class Transaction {
     public void setType(boolean type) {
         this.type = type;
     }
+
+    //-------------------------------------------------
 
     public Timestamp getDateTime() {
         return dateTime;
@@ -44,6 +65,8 @@ public class Transaction {
         this.dateTime = dateTime;
     }
 
+    //-------------------------------------------------
+
     public double getAmount() {
         return amount;
     }
@@ -51,6 +74,8 @@ public class Transaction {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    //-------------------------------------------------
 
     public double getNewBalance() {
         return newBalance;
@@ -60,6 +85,8 @@ public class Transaction {
         this.newBalance = newBalance;
     }
 
+    //-------------------------------------------------
+
     public double getOldBalance() {
         return oldBalance;
     }
@@ -67,6 +94,8 @@ public class Transaction {
     public void setOldBalance(double oldBalance) {
         this.oldBalance = oldBalance;
     }
+
+    //-------------------------------------------------
 
     public String getAccountUUID() {
         return accountUUID;
@@ -76,6 +105,8 @@ public class Transaction {
         this.accountUUID = accountUUID;
     }
 
+    //-------------------------------------------------
+
     public String getTransactionUUID() {
         return transactionUUID;
     }
@@ -84,15 +115,19 @@ public class Transaction {
         this.transactionUUID = transactionUUID;
     }
 
+    //-------------------------------------------------
+
     @Override
     public String toString() {
         //       #) || Date & Time of transaction : Type  : Amount : Current Balance
-        return String.format(" %s : %s $%.2f%s : $%.2f",
+        return String.format(" %.19s : %s $%.2f%s : $%.2f",
                 dateTime.toString(),
                 type ? "Deposit :" + GREEN_TEXT : "Withdrawl :" + RED_TEXT,
                 amount,
                 RESET_TEXT,
                 newBalance);
     }
+
+    //-------------------------------------------------
 
 }

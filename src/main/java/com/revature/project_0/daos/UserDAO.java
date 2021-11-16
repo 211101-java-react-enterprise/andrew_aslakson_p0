@@ -10,15 +10,56 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+/**
+ *      Follows Singleton Design pattern
+ *          -Only one instance of this object can exist!
+ *
+ *      performs sql queries related to users, data should
+ *      be verified before entering this class!
+ *
+ *      Used for login, registration, and second user login
+ *      when adding a second user to an account.
+ */
+
 public class UserDAO implements CrudDAO<User> {
+
+    //0000000000000000000000000000000000000000000000000
+
+    private static UserDAO userDao;
+
+    //0000000000000000000000000000000000000000000000000
+
+    static {
+        userDao = new UserDAO();
+    }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    private UserDAO() {
+
+    }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
+
+    static public UserDAO getInstance(){
+        return userDao;
+    }
+
+    //-------------------------------------------------
 
     public User findUserByUsername(String username) {
         return getUserBySingleField("username", username);
     }
 
+    //-------------------------------------------------
+
     public User findUserByEmail(String email) {
         return getUserBySingleField("email", email);
     }
+
+    //-------------------------------------------------
 
     public User findUserByUsernameAndPassword(String username, String password) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -40,6 +81,8 @@ public class UserDAO implements CrudDAO<User> {
 
         return null;
     }
+
+    //-------------------------------------------------
 
     @Override
     public User save(User newUser) {
@@ -69,26 +112,37 @@ public class UserDAO implements CrudDAO<User> {
         return null;
     }
 
+    //-------------------------------------------------
+
     @Override
     public TraversingList<User> findAll() {
         return null;
     }
+
+    //-------------------------------------------------
 
     @Override
     public User findById(String id) {
         return null;
     }
 
+    //-------------------------------------------------
+
     @Override
     public boolean update(User updatedObj) {
         return false;
     }
+
+    //-------------------------------------------------
 
     @Override
     public boolean removeById(String id) {
         return false;
     }
 
+    //-------------------------------------------------
+
+    // More generic usage, avoids repeated code
     private User getUserBySingleField(String field, String data) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -108,6 +162,9 @@ public class UserDAO implements CrudDAO<User> {
         return null;
     }
 
+    //-------------------------------------------------
+
+    // takes in ResultSet and outputs user, avoids repeated code
     private User createUserByResultSet(ResultSet rs) throws SQLException {
 
         User user = new User(
@@ -122,4 +179,7 @@ public class UserDAO implements CrudDAO<User> {
         return user;
 
     }
+
+    //-------------------------------------------------
+
 }

@@ -13,7 +13,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+/**
+ *      Follows Singleton Design pattern
+ *          -Only one instance of this object can exist!
+ *
+ *      performs sql queries related to Accounts, data should
+ *      be verified before entering this class!
+ *
+ *      Used for pulling accounts on account selection screen
+ *      registering accounts and linking accounts to users
+ */
+
 public class AccountDAO implements CrudDAO<Account>{
+
+    //0000000000000000000000000000000000000000000000000
+
+    private static AccountDAO accountDao;
+
+    //0000000000000000000000000000000000000000000000000
+
+    static {
+        accountDao = new AccountDAO();
+    }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    private AccountDAO() {
+
+    }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
+
+    static public AccountDAO getInstance(){
+        return accountDao;
+    }
+
+    //-------------------------------------------------
+
     public DoubleLinkedList findAccounts(String userUUID) {
 
         DoubleLinkedList<Account> results = new DoubleLinkedList<>();
@@ -31,13 +69,15 @@ public class AccountDAO implements CrudDAO<Account>{
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                /*
                 if (rs.getString("type").equals("C")) {
                     results.add(new CheckingAccount(rs.getString("account_name"), rs.getDouble("current_balance")));
 
                 } else {
                     results.add(new SavingsAccount(rs.getString("account_name"), rs.getDouble("current_balance")));
                 }
-                results.getTop().setAccountUUID(rs.getString("account_uuid"));
+                */
+                results.add(createAccountFromResultsSet(rs));
 
             }
             return results;
@@ -48,6 +88,8 @@ public class AccountDAO implements CrudDAO<Account>{
 
         return null;
     }
+
+    //-------------------------------------------------
 
     @Override
     public Account save(Account newAccount) {
@@ -76,8 +118,11 @@ public class AccountDAO implements CrudDAO<Account>{
         return null;
     }
 
+    //-------------------------------------------------
+
     // This should be run right after saving
-    // TODO implement this in save function
+    // is still a public method as it is useful
+    // linking current users to current accounts
     public boolean linkAccountToUser(String userUUID, String accountUUID) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -98,25 +143,35 @@ public class AccountDAO implements CrudDAO<Account>{
         return false;
     }
 
+    //-------------------------------------------------
+
     @Override
     public TraversingList findAll() {
         return null;
     }
+
+    //-------------------------------------------------
 
     @Override
     public Account findById(String id) {
         return null;
     }
 
+    //-------------------------------------------------
+
     @Override
     public boolean update(Account updatedObj) {
         return false;
     }
 
+    //-------------------------------------------------
+
     @Override
     public boolean removeById(String id) {
         return false;
     }
+
+    //-------------------------------------------------
 
     public boolean doesUserIDHaveAccountName(String userUUID, String name) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -143,6 +198,8 @@ public class AccountDAO implements CrudDAO<Account>{
         return false;
     }
 
+    //-------------------------------------------------
+
     private Account createAccountFromResultsSet(ResultSet rs) throws SQLException {
         Account tempAccount;
         if (rs.getString("type").equals("C")) {
@@ -165,6 +222,8 @@ public class AccountDAO implements CrudDAO<Account>{
         return null;
     }
 
+    //-------------------------------------------------
+
     public boolean updateBalance(double newBalance, String accountUUID) {
 
 
@@ -185,4 +244,7 @@ public class AccountDAO implements CrudDAO<Account>{
 
         return false;
     }
+
+    //-------------------------------------------------
+
 }

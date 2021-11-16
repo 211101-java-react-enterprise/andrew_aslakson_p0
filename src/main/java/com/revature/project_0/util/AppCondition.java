@@ -11,7 +11,20 @@ import com.revature.project_0.services.UserService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * App Condition stores the runtime information of the entire program
+ *      - Holds navigator object so any screen can navigate to any screen
+ *      - This class holds references to service classes that are necessary for program functions
+ *          these service classes are generally passed into screens so only 1 of any of these
+ *          objects need ever exist
+ *
+ *
+ *      This class also holds the looping operation of the first menu screen
+ *      it is based on whether running is true or false
+ */
 public class AppCondition {
+
+    //0000000000000000000000000000000000000000000000000
 
     private static boolean running;
     private final Navigator navigator;
@@ -21,16 +34,21 @@ public class AppCondition {
     private final AccountService accountService;
     private final TransactionService transactionService;
 
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
     public AppCondition() {
+        //initialize various services
         running = true;
         navigator = new Navigator();
         reader = new BufferedReader(new InputStreamReader(System.in));
 
-        userService = new UserService(new UserDAO());
-        accountService = new AccountService(new AccountDAO());
-        transactionService = new TransactionService(new TransactionDAO());
+        userService = new UserService(UserDAO.getInstance());
+        accountService = new AccountService(AccountDAO.getInstance());
+        transactionService = new TransactionService(TransactionDAO.getInstance());
 
-        // TODO add MORE Menus here!
+        //Adding menus to navigator
         navigator.addMenu(new WelcomeMenu(reader, navigator));
         navigator.addMenu(new MainMenu(reader, navigator));
         navigator.addMenu(new UserRegisterMenu(reader, navigator, userService));
@@ -43,9 +61,15 @@ public class AppCondition {
         navigator.addMenu(new AccountActionMenu(reader, navigator, accountService));
         navigator.addMenu(new WithdrawalMenu(reader, navigator, accountService, transactionService));
         navigator.addMenu(new DepositMenu(reader, navigator, accountService, transactionService));
+        navigator.addMenu(new AddUserToExistingAccountMenu(reader, navigator, userService, accountService));
 
     }
 
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
+
+    //called at program start, sends user to welcome screen
     public void startApp() {
         try {
             while (running) {
@@ -56,7 +80,13 @@ public class AppCondition {
         }
     }
 
+    //-------------------------------------------------
+
+    // called to shut down program
     public static void shutdown() {
         running = false;
     }
+
+    //-------------------------------------------------
+
 }

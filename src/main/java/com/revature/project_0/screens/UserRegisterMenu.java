@@ -6,13 +6,30 @@ import com.revature.project_0.util.Navigator;
 
 import java.io.BufferedReader;
 
+/**
+ *      This menu is accessed when registering a new user
+ *
+ *      holds UserService instance to do this
+ */
+
 public class UserRegisterMenu extends Menu {
+
+    //0000000000000000000000000000000000000000000000000
+
     private UserService userService;
+
+    //0000000000000000000000000000000000000000000000000
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
     public UserRegisterMenu(BufferedReader consoleReader, Navigator navigator, UserService userService) {
         super("Registration Menu", "/register", consoleReader, navigator);
         this.userService = userService;
     }
+
+    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+    //-------------------------------------------------
 
     @Override
     public void render() throws Exception {
@@ -50,6 +67,8 @@ public class UserRegisterMenu extends Menu {
 
         userService.register(newUser);
         System.out.println("User persisted to database.");
-        navigator.navigateTo("/main_menu");
     }
+
+    //-------------------------------------------------
+
 }
