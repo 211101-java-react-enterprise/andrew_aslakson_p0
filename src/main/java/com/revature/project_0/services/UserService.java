@@ -42,8 +42,19 @@ public class UserService {
     // Verifies user credentials and accesses userDAO to persist user in database
     public boolean register(User user) {
         if (!isUserValid(user)) {
+            logger.log("User provided invalid credentials:\n" +
+                            "Provided user credentials: \n" +
+                            "First Name: " + user.getFirstName()+ "\n" +
+                            "Last Name: " + user.getLastName() + "\n" +
+                            "E-Mail: " + user.getEmail()+ "\n" +
+                            "Username: " + user.getUsername()+ "\n" +
+                            "password: " + user.getPassword()+ "\n");
+
             throw new InvalidCredentialException("Invalid user input.");
+
         }
+
+        logger.log("user validated");
 
         boolean nameAvailable = userDAO.findUserByUsername(user.getUsername()) == null;
         boolean emailAvailable = userDAO.findUserByEmail(user.getEmail()) == null;
@@ -52,16 +63,22 @@ public class UserService {
             String errMsg = "The values provided for the following fields are already taken by other users:";
             if (!nameAvailable) errMsg = errMsg + "\n\t- username";
             if (!emailAvailable) errMsg = errMsg + "\n\t- email";
+
+            logger.log(errMsg);
+
             throw new ResourcePersistenceException(errMsg);
         }
 
         User userVerified = userDAO.save(user);
 
         if (userVerified == null) {
+            logger.log("User failed to persist to database!");
+
             throw new ResourcePersistenceException("The user could not be persisted to the database!");
         }
 
-        return false;
+        logger.log("User persisted to database successfully!");
+        return true;
     }
 
     //-------------------------------------------------
@@ -70,6 +87,9 @@ public class UserService {
     public void authenticate(String username, String password) {
         if (!username.trim().equals("") && username != null && !password.trim().equals("") && password != null) {
             currentUser = userDAO.findUserByUsernameAndPassword(username, password);
+            if (currentUser != null) {
+                logger.log("User Authenticated successfully");
+            }
         }
 
     }

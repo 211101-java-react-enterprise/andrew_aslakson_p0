@@ -46,14 +46,20 @@ public class TransactionService {
     public Transaction register(Transaction transaction) {
 
         if (!isTransactionValid(transaction)) {
+            logger.log("Transaction is not valid\nEither the withdrawal is too large, or user input 0 or negative number");
             throw new InvalidCredentialException("Invalid user input.");
         }
+
+        logger.log("Transaction Validated.");
 
         Transaction transactionVerified = transactionDAO.save(transaction);
 
         if (transactionVerified == null) {
-            throw new ResourcePersistenceException("The user could not be persisted to the database!");
+            logger.log("Transaction failed to be persisted to database");
+            throw new ResourcePersistenceException("The transaction could not be persisted to the database!");
         }
+
+        logger.log("Transaction persisted to database successfully");
 
         return transactionVerified;
     }

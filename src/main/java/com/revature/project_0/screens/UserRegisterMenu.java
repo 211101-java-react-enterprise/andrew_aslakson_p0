@@ -52,17 +52,6 @@ public class UserRegisterMenu extends Menu {
         String password = consoleReader.readLine();
         System.out.println("\\--------------------------------------------/");
 
-        //DEBUG OUTPUT
-        /*
-        System.out.printf("Provided user credentials:\n" +
-                          "First Name: %s\n" +
-                          "Last Name: %s\n" +
-                          "E-Mail: %s\n" +
-                          "Username: %s\n" +
-                          "password: %s\n",
-                          firstName, lastName, email, username, password);
-        */
-
         User newUser = new User(firstName, lastName, email, username, password);
 
         userService.register(newUser);

@@ -68,6 +68,8 @@ public class UserDAO implements CrudDAO<User> {
     public User findUserByUsernameAndPassword(String username, String password) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            logger.log("Attempting to locate user in database by username and password");
+
             String sql = "select * from users where username = ? and password = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -77,12 +79,15 @@ public class UserDAO implements CrudDAO<User> {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
+                logger.log("User located in database");
                 return createUserByResultSet(rs);
             }
         } catch (SQLException e) {
+            logger.log("SQL error when attempting to look up user by username and password");
             e.printStackTrace();
         }
 
+        logger.log("Could not locate existing user with username and password");
         return null;
     }
 
@@ -91,6 +96,8 @@ public class UserDAO implements CrudDAO<User> {
     @Override
     public User save(User newUser) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            logger.log("Attempting to save user to database");
 
             newUser.setUserUUID(UUID.randomUUID().toString());
 
@@ -106,12 +113,17 @@ public class UserDAO implements CrudDAO<User> {
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted != 0) {
+                logger.log("User persisted to database successfully!");
                 return newUser;
             }
 
         } catch (SQLException e) {
+            logger.log("SQL error occurred while attempting to save user to database");
+            logger.log(e.getMessage());
             e.printStackTrace();
         }
+
+        logger.log("Failed to persist user to database");
 
         return null;
     }

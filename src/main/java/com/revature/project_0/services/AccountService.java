@@ -39,18 +39,31 @@ public class AccountService {
     // and then persists user to database
     public Account register(Account account, String userUUID) {
         if (!isAccountValid(account)) {
+            logger.log("Invalid credentials provided when creating account");
             return null;
         }
 
+        logger.log("Account credentials verified");
+
         Account newAccount;
         if (!accountDAO.doesUserIDHaveAccountName(userUUID, account.getName())) {
+            logger.log("user does not already have account with name: " + account.getName());
+            logger.log("Account is valid to save");
+
             newAccount = accountDAO.save(account);
             if (!accountDAO.linkAccountToUser(userUUID, newAccount.getAccountUUID())) {
+                logger.log("Issue occured when attempting to link account to user");
+
                 return null;
             }
+
+            logger.log("account persisted and link to user was made successfully");
+
             return newAccount;
 
         }
+        logger.log("User alread has account with given name, failed to persist new information");
+
         return null;
     }
 
@@ -59,6 +72,7 @@ public class AccountService {
     // gets a list of accounts that user is associated with
     public DoubleLinkedList<Account> getAccounts(String userUUID) {
         if (!userUUID.trim().equals("") && userUUID != null) {
+            logger.log("UserUUID validated, ready to locate accounts");
             return accountDAO.findAccounts(userUUID);
         }
 
@@ -70,8 +84,10 @@ public class AccountService {
     // Used when linking account that already exists to user that already exists
     public boolean linkAccountToUser(String accountUUID, String userUUID) {
         if (accountDAO.linkAccountToUser(userUUID, accountUUID)) {
+            logger.log("New User has been linked to account successfully");
             return true;
         }
+        logger.log("Could not create new link from new user to account data persistence failed");
         return false;
     }
 
