@@ -2,8 +2,6 @@ package com.revature.project_0;
 
 import com.revature.project_0.util.AppCondition;
 
-//TODO: Implement Singleton design patterns on elements we can do this for
-
 /**
  * Project_0
  *      -Banking app

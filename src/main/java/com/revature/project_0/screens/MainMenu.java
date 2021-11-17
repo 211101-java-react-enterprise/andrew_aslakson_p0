@@ -52,8 +52,6 @@ public class MainMenu extends Menu {
             case "3":
                 shutdown();
                 break;
-            default:
-                //TODO: Implement me!
 
         }
     }
