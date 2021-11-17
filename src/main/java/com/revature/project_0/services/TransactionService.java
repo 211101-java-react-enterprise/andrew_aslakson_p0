@@ -67,7 +67,7 @@ public class TransactionService {
     //-------------------------------------------------
 
     // Private method, ensures integrity of user entered data
-    private boolean isTransactionValid(Transaction transaction) {
+    boolean isTransactionValid(Transaction transaction) {
         return (transaction.getNewBalance() >= 0 && transaction.getAmount() > 0 );
     }
 

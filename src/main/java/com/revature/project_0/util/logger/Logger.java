@@ -22,7 +22,7 @@ public class Logger {
     private static final String ANSI_YELLOW = "\u001b[33m";
 
     //Hard-coded printToConsole variable
-    private static final Logger logger = new Logger(true);
+    private static final Logger logger = new Logger(false);
     private final boolean printToConsole;
 
     //0000000000000000000000000000000000000000000000000

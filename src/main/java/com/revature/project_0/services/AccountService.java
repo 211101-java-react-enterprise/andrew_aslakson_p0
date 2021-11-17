@@ -115,9 +115,9 @@ public class AccountService {
     //-------------------------------------------------
 
     // Private method holds logic to validate user entered values before accesing DAO
-    private boolean isAccountValid(Account account) {
+    boolean isAccountValid(Account account) {
         if (account == null) return false;
-        if (account.getName().trim().equals("") || account.getName() == null) return false;
+        if (account.getName().trim().equals("")) return false;
         return account.getType() != null;
     }
 
