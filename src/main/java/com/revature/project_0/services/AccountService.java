@@ -1,6 +1,9 @@
 package com.revature.project_0.services;
 
 import com.revature.project_0.daos.AccountDAO;
+import com.revature.project_0.exceptions.InvalidCredentialException;
+import com.revature.project_0.exceptions.InvalidRequestException;
+import com.revature.project_0.exceptions.ResourcePersistenceException;
 import com.revature.project_0.models.accounts.Account;
 import com.revature.project_0.util.collections.DoubleLinkedList;
 import com.revature.project_0.util.logger.Logger;
@@ -40,7 +43,7 @@ public class AccountService {
     public Account register(Account account, String userUUID) {
         if (!isAccountValid(account)) {
             logger.log("Invalid credentials provided when creating account");
-            return null;
+            throw new InvalidRequestException("Invalid credentials given");
         }
 
         logger.log("Account credentials verified");
@@ -52,9 +55,9 @@ public class AccountService {
 
             newAccount = accountDAO.save(account);
             if (!accountDAO.linkAccountToUser(userUUID, newAccount.getAccountUUID())) {
-                logger.log("Issue occured when attempting to link account to user");
+                logger.log("Issue occurred when attempting to link account to user");
 
-                return null;
+                throw new ResourcePersistenceException("Issue occurred when linking user to account");
             }
 
             logger.log("account persisted and link to user was made successfully");
@@ -62,9 +65,9 @@ public class AccountService {
             return newAccount;
 
         }
-        logger.log("User alread has account with given name, failed to persist new information");
+        logger.log("User already has account with given name, failed to persist new information");
 
-        return null;
+        throw new InvalidRequestException("User already has an account with that name");
     }
 
     //-------------------------------------------------

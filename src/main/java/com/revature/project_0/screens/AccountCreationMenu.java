@@ -41,7 +41,7 @@ public class AccountCreationMenu extends Menu{
     @Override
     public void render() throws Exception {
         System.out.println("/----------------------------------\\");
-        System.out.printf(" Account Creation for %s:", userService.getCurrentUser().getUsername());
+        System.out.printf("Account Creation for %s:\n", userService.getCurrentUser().getUsername());
         System.out.print("Account Name: ");
         String name = consoleReader.readLine();
 
@@ -67,14 +67,15 @@ public class AccountCreationMenu extends Menu{
         }
 
         try {
-            accountService.register(newAccount, userService.getCurrentUser().getUserUUID());
-            System.out.println("Account Persisted Successfully!");
+            if (accountService.register(newAccount, userService.getCurrentUser().getUserUUID()) != null)
+                System.out.println("Account Persisted Successfully!");
 
         } catch (Exception e) {
             System.out.println("Account creation failed:");
             System.out.println("   Please note a user cannot");
             System.out.println("   have two accounts with the");
-            System.out.println("   same name.");
+            System.out.println("   same name and name can not");
+            System.out.println("   be empty.");
 
         }
 

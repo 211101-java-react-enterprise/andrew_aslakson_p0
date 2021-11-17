@@ -69,12 +69,12 @@ public class AddUserToExistingAccountMenu extends Menu {
 
         try {
             userService.authenticate(username, password);
-            System.out.println("Second User logged in successfully");
 
             if (userService.getCurrentUser() != null) {
 
                 try {
                     if (accountService.linkAccountToUser(accountService.getCurrentAccount().getAccountUUID(), userService.getCurrentUser().getUserUUID())) {
+                        System.out.println("Second User logged in successfully");
                         System.out.printf("User: %s now has access to account: %s\n",
                                 userService.getCurrentUser().getUsername(),
                                 accountService.getCurrentAccount().getName());

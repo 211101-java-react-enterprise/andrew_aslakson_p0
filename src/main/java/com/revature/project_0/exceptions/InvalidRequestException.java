@@ -9,7 +9,7 @@ public class InvalidRequestException extends RuntimeException {
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
-    InvalidRequestException(String msg) {
+    public InvalidRequestException(String msg) {
         super(msg);
     }
 
